@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: Teams API
+  description: API para gestionar equipos con un número flexible de miembros.
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:8080'
+    description: Servidor de desarrollo local
+
+paths:
+  /v1/api/teams:
+    post:
+      summary: Crea un nuevo equipo
+      description: Recibe un array de nombres para crear un nuevo equipo, con restricción en la longitud de los nombres.
+      operationId: createTeam
+      tags:
+        - Pokemon
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teamMembers:
+                  type: array
+                  items:
+                    type: string
+                    maxLength: 20
+                    example: "John Doe"
+              required:
+                - teamMembers
+      responses:
+        '201':
+          description: Equipo creado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Equipo creado con éxito"
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Datos inválidos proporcionados"
+        '500':
+          description: Error interno del servidor
