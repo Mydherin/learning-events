@@ -17,6 +17,18 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+  # Same than the configuration on the bean
+  #cache:
+  #  type: caffeine
+  #  cache-names: pokemonCollection # Define los nombres de las cachés que se van a gestionar
+  #  caffeine:
+  #    spec: expireAfterWrite=24h # Configura la expiración después de escribir para todas las cachés mencionadas
+
 springdoc:
   api-docs:
     enabled: true
