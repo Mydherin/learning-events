@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>local.learning</groupId>
-    <artifactId>companies</artifactId>
+    <artifactId>kafka-companies</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>companies</name>
     <description>POC-rabbitMq</description>

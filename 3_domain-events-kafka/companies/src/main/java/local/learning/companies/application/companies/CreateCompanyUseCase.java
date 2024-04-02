@@ -1,7 +1,7 @@
 package local.learning.companies.application.companies;
 
 import local.learning.companies.domain.companies.CompanyCreatedEvent;
-import local.learning.companies.infrastructure.RabbitEventBus;
+import local.learning.companies.infrastructure.KafkaEventBus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 public class CreateCompanyUseCase {
 
     private final CompanyRepository companyRepository;
-    private final RabbitEventBus rabbitEventBus;
+    private final KafkaEventBus kafkaEventBus;
 
     public void handle(final CreateCompanyUseCaseCommand command) {
         this.companyRepository.save(command.getCompany());
         final var event = new CompanyCreatedEvent(
                 command.getCompany().getId(),
                 command.getCompany().getName());
-        this.rabbitEventBus.publish(event);
+        this.kafkaEventBus.publish(event);
     }
 }
