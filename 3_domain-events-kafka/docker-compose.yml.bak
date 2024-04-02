@@ -1,0 +1,15 @@
+version: '3'
+services:
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_NODE_ID: 1 # En modo KRaft, se usa NODE_ID en lugar de BROKER_ID
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093 # Configuración específica de KRaft para el quórum
+      KAFKA_PROCESS_ROLES: broker,controller # Define los roles de este nodo
+      KAFKA_LOG_DIRS: /kafka/logs # Directorio para almacenar logs de Kafka
+      KAFKA_METADATA_LOG_DIR: /kafka/metadata-log # Directorio para almacenar el log de metadatos de KRaft
